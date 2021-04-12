@@ -8,6 +8,21 @@ import RunSprites as spr
 player = Setup.player
 inimigo = Setup.inimigo
 
+
+def atualizaSprites():
+
+    '''
+    Função que atualiza as sprites dos personagens e da
+    vida (sprite dos corações) já que era muito usado pelo 
+    código e muito repetitivo, o que facilita a leitura e 
+    compreensão do código, além de separar funcionalidades.
+    '''
+    janela = Setup.janela
+
+    janela.blit(spr.kleber, [50, 300])
+    janela.blit(spr.jorge, [650, 310])
+    print_vida()
+
 def ordem_com(player, inimigo):
 
     vel_P = player.stats['Velocidade']
@@ -74,9 +89,7 @@ def funcao_combate():
     
     Setup.FPS.tick(0.5)
     Setup.janela.blit(spr.fundo_1, [0,0])
-    janela.blit(spr.kleber, [50, 300])
-    janela.blit(spr.jorge, [650, 310])
-    print_vida()
+    atualizaSprites()
 
 
     ordem = ordem_com(player, inimigo)
@@ -85,15 +98,11 @@ def funcao_combate():
     janela.blit(spr.fundo_1, [0,0])
     declara_turno = inicio.render("Turno de {0}, o(a) {1}".format(turno.nome, turno.classe), 15, (255,255,255))
     janela.blit(declara_turno, (160, 30))
-    janela.blit(spr.kleber, [50, 300])
-    janela.blit(spr.jorge, [650, 310])
-    print_vida()
+    atualizaSprites()
     
     if type(turno) == Stats_Base.Heroi:
         # print('heroi')
-        janela.blit(spr.kleber, [50, 300])
-        janela.blit(spr.jorge, [650, 310])
-        print_vida()
+        atualizaSprites()
 
         if turno.state == "ATACAR":
             # print('ataca')
@@ -106,9 +115,7 @@ def funcao_combate():
             janela.blit(spr.fundo_1, [0,0])
             janela.blit(player_ataca, (180, 30))
             janela.blit(dano, (200, 60))
-            janela.blit(spr.kleber, [50, 300])
-            janela.blit(spr.jorge, [650, 310])
-            print_vida()
+            atualizaSprites()
             Setup.ataque_espada.play()
 
             if Setup.i == 0:
@@ -120,9 +127,7 @@ def funcao_combate():
             if Setup.h == 0:
                 player_heal(player)
                 janela.blit(spr.fundo_1, [0,0])
-                janela.blit(spr.kleber, [50, 300])
-                janela.blit(spr.jorge, [650, 310])
-                print_vida()
+                atualizaSprites()
                 titulo = inicio.render("{0} cura {1} de vida!" .format(turno.nome, player.heal), 15, (255,255,255))
                 janela.blit(titulo, (200, 30))
                 turno.state = "NEUTRO"
@@ -154,9 +159,7 @@ def funcao_combate():
             janela.blit(inimigo_ataca, (150, 30))
             inimigo_ataca2 = inicio.render("O ataque causa {0} dano!" .format(vida_anterior - player.vida_variavel), 15, (255,255,255))
             janela.blit(inimigo_ataca2, (165, 60))
-            janela.blit(spr.kleber, [50, 300])
-            janela.blit(spr.jorge, [650, 310])
-            print_vida()
+            atualizaSprites()
             Setup.ataque_lobo.play()
 
 #                   mantem no turno do player repetindo o main loop e assim
@@ -166,9 +169,7 @@ def funcao_combate():
             janela.blit(spr.fundo_1, [0,0])
             inimigo_nao_ataca = inicio.render("{0}, o(a) {1} não faz nada...".format(turno.nome, turno.classe), 15, (255,255,255))
             janela.blit(inimigo_nao_ataca, (50, 30))
-            janela.blit(spr.kleber, [50, 300])
-            janela.blit(spr.jorge, [650, 310])
-            print_vida()
+            atualizaSprites()
         
         if Setup.i == 0:
             Setup.i = 1

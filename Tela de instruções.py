@@ -1,3 +1,5 @@
+
+
 #tela de instruções do jogo
 import pygame
 
